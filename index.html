@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Convert decimal to binary</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: indigo;
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;            
+        }
+
+        .conversion {
+            background: whitesmoke;
+            padding: 1em;
+            border-radius: 3px;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.7);
+            color: #111;
+        }        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Convert decimal to binary</h1>
+        <div class="conversion">
+            <div class="input">
+                <input id="input" type="text" placeholder="Insert decimal here!">
+                <button id="convert">Convert</button>
+            </div>
+            <div class="output"></div>
+        </div>
+    </div>
+    <script>
+        const $input = document.getElementById("input");
+        const $button = document.getElementById("convert");
+        const $output = document.querySelector(".output");
+
+        function toBinary(decimal) {
+            decimal = Number(decimal);
+            let binary = [];
+
+            while( decimal > 0 ) {
+                binary.push(decimal % 2);
+                decimal = Math.floor(decimal / 2);
+            }
+
+            return binary.reverse().join('');
+        }
+
+        function conversion() {
+            $output.innerHTML = toBinary($input.value);
+        }
+
+
+        $button.addEventListener("click", conversion, false);
+        $input.addEventListener("keyup", function(e){
+            if(e.keyCode === 13) {
+                conversion();
+            }
+        }, false);
+
+    </script>
+</body>
+</html>
